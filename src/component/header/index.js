@@ -21,7 +21,7 @@ class Header extends Component {
           </a>
           <nav>
             <ul>
-              <li className="active">滚动·文字</li>
+              <li className="active">滚动.文字</li>
               <li>
                 <p className={'active ' + style['search']}>
                   <input
