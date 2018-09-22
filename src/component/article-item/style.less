@@ -1,45 +1,78 @@
-.container {
-    :hover {
-        background: #FBFCFB;
+
+:global {
+    .container {
+        :hover {
+            background: #FBFCFB;
+        }
     }
-}
-.article-item {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    height: 82px;
-    width: 652px;
-    padding: 18px 24px;
-    background: white;
-    border: 1px solid #F3F5F4;
-   
-}
-.infobox {
-    width: 568px;
-}
-.metaList {
-    li {
-        display: inline;
-        list-style: none;
+    .article-item {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        height: 82px;
+        width: 652px;
+        padding: 18px 24px;
+        background: white;
+        border: 1px solid #F3F5F4;
+       
     }
-}
-.column {
-    font-weight: 500;
-    color: #b71ed7;
-}
-.title {
-    margin-top: 6px;
-    margin-bottom: 12px; 
-    font-size: 1.4rem;
-    font-weight: 600;
-    line-height: 1.2;
-    color: #2e3135;
-}
-.actions {
-    height: 26px;
-}
-.article-img {
-    height: 60px;
-    width: 60px;
-    margin-left: 24px;
+    .infobox {
+        width: 568px;
+    }
+    .metaList {
+        li {
+            display: inline;
+            list-style: none;
+        }
+    }
+    .column {
+        font-weight: 500;
+        color: #b71ed7;
+    }
+    .title {
+        margin-top: 6px;
+        margin-bottom: 12px; 
+        font-size: 1.4rem;
+        font-weight: 600;
+        line-height: 1.2;
+        color: #2e3135;
+    }
+    .articleitem-buttons {
+        display: flex;
+        flex-direction: row;
+        font-weight: 700;
+        font-size: 14px;
+        height: 26px;
+        .articleitem-buttons-count {
+            margin-left: 3px;
+        }
+        .active {
+            color: #6cbd45;
+        }
+    }
+    .articleitem-button1 {
+        display: flex;
+        justify-content: center; 
+        align-items: center;
+        height: 24px;
+        width: 50px;
+        border: 1px solid #edeeef;
+        color: #b2bac2;
+    }
+    .articleitem-button2 {
+        display: flex;
+        justify-content: center; 
+        align-items: center;
+        height: 24px;
+        width: 50px;
+        border-right: 1px solid #edeeef;
+        border-top: 1px solid #edeeef;
+        border-bottom: 1px solid #edeeef;
+        color: #b2bac2;
+    }
+    .article-img {
+        height: 60px;
+        width: 60px;
+        margin-left: 24px;
+    }
 }
