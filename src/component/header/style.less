@@ -16,8 +16,8 @@ header {
   width: 100%;
   top: 0;
   left: 0;
-  height: 5rem;
   background-color: #fff;
+ 
   .container {
     display: flex;
     align-items: center;
@@ -35,6 +35,11 @@ header {
         display: flex;
         list-style-type: none;
         justify-content: flex-end;
+        :global {
+          .active {
+            color: #007fff;
+          }
+        }
         li {
           height: 5rem;
           font-size: 1.33rem;
@@ -60,12 +65,34 @@ header {
               color: #666;
               background-color: transparent;
             }
-            &.active {
+            .active {
               border-color: #007fff;
               background-color: #fff;
             }
           }
-          
+        }
+      }
+    }
+  }
+  .second-header {
+    background-color: #fff;
+    border-top: 1px solid rgb(241, 241, 241);
+    nav {
+      ul {
+        display: flex;
+        list-style-type: none;
+        justify-content: flex-end;
+        li {
+          font-size: 1.16rem;
+          color: #71777c;
+          padding: 0 1rem;
+          height: 3.8rem;
+          line-height: 3.8rem;
+          cursor: pointer;
+          &:hover {
+            cursor: pointer;
+            color: #007fff;
+          }
         }
         :global {
           .active {
