@@ -29,13 +29,19 @@
         font-weight: 500;
         color: #b71ed7;
     }
-    .title {
+    .articleitem-title {
         margin-top: 6px;
         margin-bottom: 12px; 
         font-size: 1.4rem;
         font-weight: 600;
         line-height: 1.2;
         color: #2e3135;
+        &:hover {
+            text-decoration: underline;
+        }
+        &.clicked {
+        color: #909090;
+        }
     }
     .articleitem-buttons {
         display: flex;
@@ -58,6 +64,9 @@
         width: 50px;
         border: 1px solid #edeeef;
         color: #b2bac2;
+        &:hover {
+            background: #dcdee0;
+        }
     }
     .articleitem-button2 {
         display: flex;
@@ -69,6 +78,9 @@
         border-top: 1px solid #edeeef;
         border-bottom: 1px solid #edeeef;
         color: #b2bac2;
+        &:hover {
+            background: #dcdee0;
+        }
     }
     .article-img {
         height: 60px;
