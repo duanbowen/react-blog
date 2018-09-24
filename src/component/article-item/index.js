@@ -9,46 +9,55 @@ class ArticleItem extends PureComponent {
         articleInfos: PropTypes.arrayOf(
             PropTypes.shape({
                 id: PropTypes.number,
+                type: PropTypes.string,
+                topinfo: PropTypes.object,
                 title: PropTypes.string.isRequired,
                 image: PropTypes.string,
+                likeActive: PropTypes.bool,
                 likeCounts: PropTypes.number,
                 commentCounts: PropTypes.number,
             })
         ).isRequired
     }
     static defaultProps = {
-        articleInfos: [{
+        articleInfos: [
+            {
                 id: 1,
-                type: 'column', 
+                type: 'articleitem-column', 
                 topinfo: {author: 'WangZhen', time: '1小时前', classify: '前端\\JavaScript'},
                 title: '基于hapi的Node.js的程序后端开发', 
                 image: articleImg,
+                likeActive: false,
                 likeCounts: 9,
-                commentCounts: 2}, 
-                        {id: 2, type: 'volumes', topinfo: {author: 'Duanbowen', time: '5分钟前', classify: '前端'}, title: '移动端页面分享快照生成总结', image: articleImg}]
+                commentCounts: 2
+            }]
     }
     state = {
         clicked: false,
-        likeActive: false,
-        commentsActive: false
+        likeActive: false
     }
     handleArticleClick = () => {
         this.setState({
             clicked: true
         })
     }
-    onLikeClick = () => {
-        // return function test() {
-        //     console.log(index)
-        // };
+    onLikeClick = id => () => {
+        const { articleInfos } = this.props
+        const article =  articleInfos.filter(a => a.id === id)
+        console.log('current=article===', article)
         const oldLikeActive = this.state.likeActive
         this.setState({
             likeActive: oldLikeActive ? false : true
         })
     }
+    onCommentClick = id => () => {
+        const { articleInfos } = this.props
+        const article =  articleInfos.filter(a => a.id === id)
+        console.log('current=article===', article)
+    }
     render(){
         const { articleInfos } = this.props
-        const { clicked, likeActive, commentsActive } = this.state
+        const { clicked, likeActive } = this.state
         const renderMetaList = (metas) => {
             let metasList = []
             let id=0
@@ -58,13 +67,13 @@ class ArticleItem extends PureComponent {
             return metasList
         }
         return(
-            <div className="container">
-                {articleInfos.map( (article, index) => (
-                    <div key={article.id} className="article-item">
-                        <div className="infobox">
-                        <div className="metaList">
+            <div className="articleitem-container">
+                {articleInfos.map( article => (
+                    <div key={article.id} className="articleitem-items">
+                        <div className="articleitem-infobox">
+                        <div className="articleitem-metaList">
                             <ul>
-                            <span className="column">专栏-</span>
+                            <span className="articleitem-column">专栏</span>
                                 {renderMetaList(article.topinfo)}
                             </ul>
                         </div>
@@ -73,12 +82,13 @@ class ArticleItem extends PureComponent {
                             <a>{article.title}</a>
                         </div>
                          <div className="articleitem-buttons">
-                            <div className="articleitem-button1" onClick={this.onLikeClick}>
+                            <div className="articleitem-button1" onClick={this.onLikeClick(article.id)}>
                                 {likeActive ? (<img src={likeIconClick}/>) : (<img src={likeIcon}/>)}
                                 <span className={likeActive ? 'articleitem-buttons-count active': 'articleitem-buttons-count'}>{article.likeCounts}</span>
                             </div>
-                            <div className="articleitem-button2" onClick={this.onCommentClick}>
-                                <img src={commentIcon}/><span className="articleitem-buttons-count">9</span>
+                            <div className="articleitem-button2" onClick={this.onCommentClick(article.id)}>
+                                <img src={commentIcon}/>
+                                <span className="articleitem-buttons-count">{article.commentCounts}</span>
                             </div>
                         </div>
                         </div>

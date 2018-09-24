@@ -1,11 +1,13 @@
 
 :global {
-    .container {
+    .articleitem-container {
         :hover {
             background: #FBFCFB;
+            cursor: pointer;
+
         }
     }
-    .article-item {
+    .articleitem-items {
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -16,16 +18,21 @@
         border: 1px solid #F3F5F4;
        
     }
-    .infobox {
+    .articleitem-infobox {
         width: 568px;
     }
-    .metaList {
+    .articleitem-metaList {
         li {
             display: inline;
             list-style: none;
+            color: #909090;
+            &:hover {
+                color: #007fff;
+            }
         }
     }
-    .column {
+    .articleitem-column {
+        margin-right: 5px;
         font-weight: 500;
         color: #b71ed7;
     }
