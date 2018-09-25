@@ -5,7 +5,7 @@ class WebAppRoute extends Component {
   render() {
     return (
       <Fragment>
-        <Header />
+        {/* <Header /> */}
         <Main />
       </Fragment>
     );
