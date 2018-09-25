@@ -1,5 +1,6 @@
 :global {
     .main-container {
+        position: relative;
         margin: 0 auto;
         margin-top: 120px; 
         height: 50px;
@@ -42,11 +43,63 @@
         cursor: pointer;
         color: #909090;
     }
-    .maincontainer-header {
+    .maincontainer-entry-list {
         margin-top: 15.6px;
         margin-right: 260px;
         background-color: #fff;
         border-radius: 2px;
         box-shadow: 0 1px 2px 0 rgba(0,0,0,.05);
+    }
+    .maincontainer-list-header {
+        padding: 15.6px 12px;
+        border-bottom: 1px solid hsla(0, 0%, 59%, 0.1);
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        ul {
+            position: relative;
+        }
+        li {
+            display: inline;
+            list-style: none;
+            margin: 0 10px;
+            cursor: pointer;
+            color: #909090;
+        }
+    }
+    .maincontainer-aside {
+        width: 240px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        z-index: 1;
+        color: #333;
+    }
+    .maincontainer-aside-books {
+        width: 240px;
+        background: #fff;
+        border-radius: 2px;
+        box-shadow:  0 1px 2px 0 rgba(0,0,0,.05);
+        font-size: 1.16rem;
+        line-height: 1.29;
+    }
+    .maincontainer-aside-item {
+        .header {
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 15px;
+            border-bottom: 1px solid #f6f6f6;
+        }
+        width: 240px;
+        margin-bottom: 15.6px;
+        background: #fff;
+        border-radius: 2px;
+        box-shadow:  0 1px 2px 0 rgba(0,0,0,.05);
+        font-size: 1.16rem;
+        line-height: 1.29;
     }
 }
