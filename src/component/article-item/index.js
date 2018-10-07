@@ -9,28 +9,38 @@ class ArticleItem extends PureComponent {
         articleInfos: PropTypes.arrayOf(
             PropTypes.shape({
                 id: PropTypes.number,
-                type: PropTypes.string,
-                topinfo: PropTypes.object,
                 title: PropTypes.string.isRequired,
                 image: PropTypes.string,
-                likeActive: PropTypes.bool,
                 likeCounts: PropTypes.number,
                 commentCounts: PropTypes.number,
             })
         ).isRequired
     }
     static defaultProps = {
-        articleInfos: [
-            {
-                id: 1,
-                type: 'articleitem-column',
-                topinfo: { author: 'WangZhen', time: '1小时前', classify: '前端\\JavaScript' },
-                title: '基于hapi的Node.js的程序后端开发',
-                image: articleImg,
-                likeActive: false,
-                likeCounts: 9,
-                commentCounts: 2
-            }]
+        articleInfos: [{
+            id: 1,
+            type: 'column',
+            topinfo: { author: 'WangZhen', time: '1小时前', classify: '前端\\JavaScript' },
+            title: '基于hapi的Node.js的程序后端开发',
+            image: articleImg,
+            likeCounts: 9,
+            commentCounts: 2
+        },
+        { id: 2, type: 'volumes', topinfo: { author: 'Duanbowen', time: '5分钟前', classify: '前端' }, title: '移动端页面分享快照生成总结', image: articleImg }]
+    }
+    state = {
+        likeActive: false,
+        commentsActive: false
+    }
+    onLikeClick = (index) => {
+        return function test() {
+            console.log(index)
+        };
+        // const oldLikeActive = t his.state.likeActive
+        // // console.log('id====', index)
+        // this.setState({
+        //     likeActive: oldLikeActive ? false : true
+        // })
     }
     state = {
         clicked: false,
@@ -67,28 +77,24 @@ class ArticleItem extends PureComponent {
             return metasList
         }
         return (
-            <div className="articleitem-container">
-                {articleInfos.map(article => (
-                    <div key={article.id} className="articleitem-items">
-                        <div className="articleitem-infobox">
-                            <div className="articleitem-metaList">
+            <div className="container">
+                {articleInfos.map((article, index) => (
+                    <div key={article.id} className="article-item">
+                        <div className="infobox">
+                            <div className="metaList">
                                 <ul>
-                                    <span className="articleitem-column">专栏</span>
+                                    <span className="column">专栏-</span>
                                     {renderMetaList(article.topinfo)}
                                 </ul>
                             </div>
-                            <div className={clicked ? 'articleitem-title clicked' : 'articleitem-title'}
-                                onClick={this.handleArticleClick}>
-                                <a>{article.title}</a>
-                            </div>
+                            <div className="title"><a>{article.title}</a></div>
                             <div className="articleitem-buttons">
-                                <div className="articleitem-button1" onClick={this.onLikeClick(article.id)}>
+                                <div className="articleitem-button1" onClick={this.onLikeClick(index)}>
                                     {likeActive ? (<img src={likeIconClick} />) : (<img src={likeIcon} />)}
                                     <span className={likeActive ? 'articleitem-buttons-count active' : 'articleitem-buttons-count'}>{article.likeCounts}</span>
                                 </div>
-                                <div className="articleitem-button2" onClick={this.onCommentClick(article.id)}>
-                                    <img src={commentIcon} />
-                                    <span className="articleitem-buttons-count">{article.commentCounts}</span>
+                                <div className="articleitem-button2" onClick={this.onCommentClick}>
+                                    <img src={commentIcon} /><span className="articleitem-buttons-count">9</span>
                                 </div>
                             </div>
                         </div>
