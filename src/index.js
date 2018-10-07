@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import WebApp from './route';
 import ReducerExample from './model/example';
-import './style.less';
+import './global.less';
 render(<Provider store={createStore(ReducerExample)}>
   <WebApp />
 </Provider>, document.querySelector('#root'));

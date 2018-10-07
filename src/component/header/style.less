@@ -1,14 +1,20 @@
 a {
   text-decoration: none;
   cursor: pointer;
+  color: #71777c;
+  &:hover {
+    color: #007fff;
+  }
 }
 
 html {
   font-size: 12px;
 }
+
 ul {
   margin: 0;
   padding: 0px;
+  list-style-type: none;
 }
 
 header {
@@ -17,89 +23,43 @@ header {
   top: 0;
   left: 0;
   background-color: #fff;
- 
-  .container {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    max-width: 960px;
-    margin: auto;
-    .logo {
-      margin-right: 2rem;
-      display: inline-block;
-    }
-    nav {
-      height: 100%;
-      flex: 1;
-      ul {
-        display: flex;
-        list-style-type: none;
-        justify-content: flex-end;
-        :global {
-          .active {
-            color: #007fff;
-          }
-        }
-        li {
-          height: 5rem;
-          font-size: 1.33rem;
-          line-height: 5rem;
-          padding: 0 1.6rem;
-          &:hover {
-            cursor: pointer;
-            color: #007fff;
-          }
-          .search {
-            display: flex;
-            align-items: center;
-            border: 1px solid hsla(0,0%,59%,.2);
-            background-color: rgba(227,231,236,.2);
-            border-radius: 2px;
-            input {
-              border: none;
-              width: 8rem;
-              padding: .6rem 1rem;
-              box-shadow: none;
-              outline: none;
-              font-size: 1.1rem;
-              color: #666;
-              background-color: transparent;
-            }
-            .active {
-              border-color: #007fff;
-              background-color: #fff;
-            }
-          }
-        }
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .05);
+  transition: all .2s;
+  :global {
+    .container {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      max-width: 960px;
+      margin: auto;
+      .active {
+        color: #007fff;
       }
-    }
-  }
-  .second-header {
-    background-color: #fff;
-    border-top: 1px solid rgb(241, 241, 241);
-    nav {
-      ul {
+      >ul {
         display: flex;
-        list-style-type: none;
-        justify-content: flex-end;
-        li {
-          font-size: 1.16rem;
+        flex: 1;
+        >li {
           color: #71777c;
-          padding: 0 1rem;
-          height: 3.8rem;
-          line-height: 3.8rem;
           cursor: pointer;
           &:hover {
             cursor: pointer;
             color: #007fff;
           }
         }
-        :global {
-          .active {
-            color: #007fff;
-          }
-        }
       }
     }
+    .divider {
+      height: 1px;
+      background-color: #f1f1f1;
+    }
+  }
+}
+
+:global {
+  .hidden {
+    transform: translate3d(0, -5rem, 0);
+  }
+  .visible {
+    transform: translateZ(0)
   }
 }
