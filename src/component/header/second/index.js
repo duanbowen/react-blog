@@ -4,7 +4,7 @@ import style from './style.less';
 class SecondHeader extends Component {
   render() {
     return (
-      <nav className="container">
+      <nav className="container second">
         <ul>
           <li className="active">我关注的</li>
           <li>web前端</li>
