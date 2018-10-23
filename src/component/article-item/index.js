@@ -14,7 +14,8 @@ class ArticleItem extends PureComponent {
                 likeCounts: PropTypes.number,
                 commentCounts: PropTypes.number,
             })
-        ).isRequired
+        ).isRequired,
+        onClick: PropTypes.func,
     }
     static defaultProps = {
         articleInfos: [{
@@ -24,74 +25,58 @@ class ArticleItem extends PureComponent {
             title: '基于hapi的Node.js的程序后端开发',
             image: articleImg,
             likeCounts: 9,
-            commentCounts: 2
+            commentCounts: 2,
         },
         { id: 2, type: 'volumes', topinfo: { author: 'Duanbowen', time: '5分钟前', classify: '前端' }, title: '移动端页面分享快照生成总结', image: articleImg }]
     }
     state = {
-        likeActive: false,
-        commentsActive: false
+        likeArticles: []
     }
-    onLikeClick = (index) => {
-        return function test() {
-            console.log(index)
-        };
-        // const oldLikeActive = t his.state.likeActive
-        // // console.log('id====', index)
-        // this.setState({
-        //     likeActive: oldLikeActive ? false : true
-        // })
-    }
-    state = {
-        clicked: false,
-        likeActive: false
-    }
-    handleArticleClick = () => {
-        this.setState({
-            clicked: true
-        })
+    handleArticleClick = item => () => {
+        const { onClick } = this.props
+        onClick && onClick(item)
     }
     onLikeClick = id => () => {
-        const { articleInfos } = this.props
-        const article = articleInfos.filter(a => a.id === id)
-        console.log('current=article===', article)
-        const oldLikeActive = this.state.likeActive
+        let likeArticles = this.state.likeArticles
+        if(likeArticles.includes(id)){
+            likeArticles = likeArticles.filter(l => l !== id)
+        }else {
+            likeArticles.push(id)
+        }
+        const  s = new Set(likeArticles)
         this.setState({
-            likeActive: oldLikeActive ? false : true
+            likeArticles: [...s]
         })
     }
     onCommentClick = id => () => {
-        const { articleInfos } = this.props
-        const article = articleInfos.filter(a => a.id === id)
-        console.log('current=article===', article)
     }
     render() {
         const { articleInfos } = this.props
-        const { clicked, likeActive } = this.state
+        const { likeArticles } = this.state      
         const renderMetaList = (metas) => {
             let metasList = []
             let id = 0
             for (let m in metas) {
-                metasList.push(<li key={id++}>{metas[m]} . </li>)
+                metasList.push(<li key={id++}>{metas[m]}</li>)
             }
             return metasList
         }
         return (
             <div className="container">
-                {articleInfos.map((article, index) => (
-                    <div key={article.id} className="article-item">
+                {articleInfos.map(article => {
+                    return (<div key={article.id} className="article-item" onClick={this.handleArticleClick(article)}>
                         <div className="infobox">
                             <div className="metaList">
                                 <ul>
-                                    <span className="column">专栏-</span>
+                                    <span className="column">专栏</span>
                                     {renderMetaList(article.topinfo)}
                                 </ul>
                             </div>
-                            <div className="title"><a>{article.title}</a></div>
+                            <div className="title"><a href="#">{article.title}</a></div>
                             <div className="articleitem-buttons">
-                                <div className="articleitem-button1" onClick={this.onLikeClick(index)}>
-                                    {likeActive ? (<img src={likeIconClick} />) : (<img src={likeIcon} />)}
-                                    <span className={likeActive ? 'articleitem-buttons-count active' : 'articleitem-buttons-count'}>{article.likeCounts}</span>
+                                <div className="articleitem-button1" onClick={this.onLikeClick(article.id)}>
+                                    {likeArticles.includes(article.id) ? (<img src={likeIconClick} />) : (<img src={likeIcon} />)}
+                                    <span className={likeArticles.includes(article.id) ? 'articleitem-buttons-count active' : 'articleitem-buttons-count'}>{article.likeCounts}</span>
                                 </div>
                                 <div className="articleitem-button2" onClick={this.onCommentClick}>
                                     <img src={commentIcon} /><span className="articleitem-buttons-count">9</span>
@@ -99,8 +84,8 @@ class ArticleItem extends PureComponent {
                             </div>
                         </div>
                         <img src={article.image} className="article-img"></img>
-                    </div>
-                ))}
+                    </div>)
+                })}
             </div>
         )
     }
