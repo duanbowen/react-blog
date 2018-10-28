@@ -14,6 +14,9 @@
     padding: 18px 24px;
     background: white;
     border: 1px solid #F3F5F4;
+    &:hover {
+      cursor: pointer;
+    }
   }
   .infobox {
     width: 568px;
@@ -22,6 +25,15 @@
     li {
       display: inline;
       list-style: none;
+      color: #b2bac2;
+      &:hover {
+        color: #007FFE;
+      }
+    }
+    li::before {
+      content: "\B7";
+      margin: 0 .4em;
+      color: #b2bac2;
     }
   }
   .column {
@@ -34,7 +46,13 @@
     font-size: 1.4rem;
     font-weight: 600;
     line-height: 1.2;
-    color: #2e3135;
+    a{
+      color: black;
+    }
+    a:hover {
+      text-decoration: underline;
+      color: black;
+    } 
   }
   .articleitem-buttons {
     display: flex;
@@ -42,6 +60,7 @@
     font-weight: 700;
     font-size: 14px;
     height: 26px;
+    width: 120px;
     .articleitem-buttons-count {
       margin-left: 3px;
     }
