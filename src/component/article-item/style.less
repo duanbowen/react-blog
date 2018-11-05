@@ -5,92 +5,24 @@
       background: #FBFCFB;
     }
   }
-  .article-item {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    height: 82px;
-    width: 652px;
-    padding: 18px 24px;
-    background: white;
-    border: 1px solid #F3F5F4;
-    &:hover {
-      cursor: pointer;
+  .article-item-list {
+    overflow-y: auto;
+    height: 100%;
+  }
+  .to-top-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    height: 3.33rem;
+    width: 3.33rem;
+    border: 1px solid #f1f1f1;
+    box-shadow: 0 0 5px rgba(0,0,0,.05);
+    border-radius: 50%;
+    background: #fff;
+    outline: none;
+    .ion-android-arrow-dropup:before {
+      content: "\f365";
     }
   }
-  .infobox {
-    width: 568px;
-  }
-  .metaList {
-    li {
-      display: inline;
-      list-style: none;
-      color: #b2bac2;
-      &:hover {
-        color: #007FFE;
-      }
-    }
-    li::before {
-      content: "\B7";
-      margin: 0 .4em;
-      color: #b2bac2;
-    }
-  }
-  .column {
-    font-weight: 500;
-    color: #b71ed7;
-  }
-  .title {
-    margin-top: 6px;
-    margin-bottom: 12px;
-    font-size: 1.4rem;
-    font-weight: 600;
-    line-height: 1.2;
-    a{
-      color: black;
-    }
-    a:hover {
-      text-decoration: underline;
-      color: black;
-    } 
-  }
-  .articleitem-buttons {
-    display: flex;
-    flex-direction: row;
-    font-weight: 700;
-    font-size: 14px;
-    height: 26px;
-    width: 120px;
-    .articleitem-buttons-count {
-      margin-left: 3px;
-    }
-    .active {
-      color: #6cbd45;
-    }
-  }
-  .articleitem-button1 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 24px;
-    width: 50px;
-    border: 1px solid #edeeef;
-    color: #b2bac2;
-  }
-  .articleitem-button2 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 24px;
-    width: 50px;
-    border-right: 1px solid #edeeef;
-    border-top: 1px solid #edeeef;
-    border-bottom: 1px solid #edeeef;
-    color: #b2bac2;
-  }
-  .article-img {
-    height: 60px;
-    width: 60px;
-    margin-left: 24px;
-  }
+
 }
