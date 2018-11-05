@@ -1,12 +1,11 @@
 import React, { PureComponent } from 'react';
-import articleImg from '../../assets/articleImg.jpg';
 import PropTypes from 'prop-types'
-import { likeIcon, likeIconClick, commentIcon } from '../../lib/const.js'
+import Article from './article'
 import './style.less';
 
 class ArticleItem extends PureComponent {
     static propstypes = {
-        articleInfos: PropTypes.arrayOf(
+        allArticles: PropTypes.arrayOf(
             PropTypes.shape({
                 id: PropTypes.number,
                 title: PropTypes.string.isRequired,
@@ -18,74 +17,46 @@ class ArticleItem extends PureComponent {
         onClick: PropTypes.func,
     }
     static defaultProps = {
-        articleInfos: [{
+        allArticles: [{
             id: 1,
             type: 'column',
             topinfo: { author: 'WangZhen', time: '1小时前', classify: '前端\\JavaScript' },
             title: '基于hapi的Node.js的程序后端开发',
-            image: articleImg,
             likeCounts: 9,
             commentCounts: 2,
         },
-        { id: 2, type: 'volumes', topinfo: { author: 'Duanbowen', time: '5分钟前', classify: '前端' }, title: '移动端页面分享快照生成总结', image: articleImg }]
+        { id: 2, type: 'volumes', topinfo: { author: 'Duanbowen', time: '5分钟前', classify: '前端' }, title: '移动端页面分享快照生成总结'}]
     }
-    state = {
-        likeArticles: []
-    }
-    handleArticleClick = item => () => {
-        const { onClick } = this.props
-        onClick && onClick(item)
-    }
-    onLikeClick = id => () => {
-        let likeArticles = this.state.likeArticles
-        if(likeArticles.includes(id)){
-            likeArticles = likeArticles.filter(l => l !== id)
-        }else {
-            likeArticles.push(id)
+    handleContentScroll = e => {
+        const { scrollTop, clientHeight, scrollHeight } = e.target
+        const { allArticles } = this.props
+        if (
+            scrollHeight - (scrollTop + clientHeight) <= 200 &&
+            !allArticles.last
+        ) {
+            this.reftchNextPageData()
         }
-        const  s = new Set(likeArticles)
-        this.setState({
-            likeArticles: [...s]
-        })
     }
-    onCommentClick = id => () => {
+    // ToDo
+    reftchNextPageData = () => {}
+    handleToTopClick = () => {
+        this.list.scrollTop = 0
     }
     render() {
-        const { articleInfos } = this.props
-        const { likeArticles } = this.state      
-        const renderMetaList = (metas) => {
-            let metasList = []
-            let id = 0
-            for (let m in metas) {
-                metasList.push(<li key={id++}>{metas[m]}</li>)
-            }
-            return metasList
-        }
+        const allArticles = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]
+        const article = { id: 2, type: 'volumes', topinfo: { author: 'Duanbowen', time: '5分钟前', classify: '前端' }, title: '移动端页面分享快照生成总结'}
         return (
             <div className="container">
-                {articleInfos.map(article => {
-                    return (<div key={article.id} className="article-item" onClick={this.handleArticleClick(article)}>
-                        <div className="infobox">
-                            <div className="metaList">
-                                <ul>
-                                    <span className="column">专栏</span>
-                                    {renderMetaList(article.topinfo)}
-                                </ul>
-                            </div>
-                            <div className="title"><a href="#">{article.title}</a></div>
-                            <div className="articleitem-buttons">
-                                <div className="articleitem-button1" onClick={this.onLikeClick(article.id)}>
-                                    {likeArticles.includes(article.id) ? (<img src={likeIconClick} />) : (<img src={likeIcon} />)}
-                                    <span className={likeArticles.includes(article.id) ? 'articleitem-buttons-count active' : 'articleitem-buttons-count'}>{article.likeCounts}</span>
-                                </div>
-                                <div className="articleitem-button2" onClick={this.onCommentClick}>
-                                    <img src={commentIcon} /><span className="articleitem-buttons-count">9</span>
-                                </div>
-                            </div>
-                        </div>
-                        <img src={article.image} className="article-img"></img>
-                    </div>)
-                })}
+                <div 
+                    className="article-item-list"
+                    ref={ref => (this.list = ref)}
+                    onScroll={this.handleContentScroll}
+                >
+                    {allArticles.map((a, index) => <Article key={index} article={article}/>)}
+                </div>
+                <button className="to-top-btn" onClick={this.handleToTopClick}>
+                    <i className="ion-android-arrow-dropup"/>
+                </button>
             </div>
         )
     }
